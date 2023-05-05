@@ -1,0 +1,270 @@
+$colors: (
+  white-blacks: (
+    0: #000,
+    1: #fff,
+    2: #f2f2f2,
+    3: #e6e6e6,
+    4: #d9d9d9,
+    5: #cccccc,
+    6: #bfbfbf,
+    7: #b3b3b3,
+    8: #a6a6a6,
+    9: #999999,
+    10: #8c8c8c,
+    11: #808080,
+    12: #737373,
+    13: #666666,
+    14: #595959,
+    15: #4d4d4d,
+    16: #404040,
+    17: #333333,
+    18: #262626,
+    19: #1a1a1a,
+    20: #0d0d0d,
+  ),
+  primary: (
+    0: #e599f7,
+    1: #f7e5f9,
+    2: #f0ccf3,
+    3: #e8b2ed,
+    4: #e099e7,
+    5: #d980e1,
+    6: #d166db,
+    7: #c94dd5,
+    8: #c133cf,
+    9: #b91ac9,
+    10: #b100c3,
+    11: #9a00b0,
+    12: #83009d,
+    13: #6c008a,
+    14: #550077,
+    15: #3e0064,
+    16: #270051,
+    17: #10003e,
+    18: #00002b,
+    19: #000018,
+    20: #000005,
+  ),
+  secondary: (
+    0: #f7e599,
+    1: #f9f7e5,
+    2: #f3f0cc,
+    3: #ede8b2,
+    4: #e7e099,
+    5: #e1d980,
+    6: #dbd166,
+    7: #d5c94d,
+    8: #cfc133,
+    9: #c9b91a,
+    10: #c3b100,
+    11: #b09a00,
+    12: #9d8300,
+    13: #8a6c00,
+    14: #775500,
+    15: #643e00,
+    16: #512700,
+    17: #3e1000,
+    18: #2b0000,
+    19: #180000,
+    20: #050000,
+  ),
+  tertiary: (
+    0: #99f7e5,
+    1: #e5f9f7,
+    2: #ccf3f0,
+    3: #b2edea,
+    4: #99e7e3,
+    5: #80e1dc,
+    6: #66dbd5,
+    7: #4dd5ce,
+    8: #33cfc7,
+    9: #1ac9c0,
+    10: #00c3b9,
+    11: #00b0a6,
+    12: #009d93,
+    13: #008a80,
+    14: #00776d,
+    15: #00645a,
+    16: #005147,
+    17: #003e34,
+    18: #002b21,
+    19: #00180e,
+    20: #00050b,
+  ),
+);
+@function color($color, $shade: 0) {
+  @return map-get(map-get($colors, $color), $shade);
+}
+
+@mixin flex($direction: row, $justify: center, $align: center, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  gap: $gap;
+  align-items: $align;
+}
+@mixin grid($columns: 12, $gap: 1.2rem) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  grid-gap: $gap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font: "Ubuntu", sans-serif;
+  font-size: 62.5%;
+
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  width: 100vw;
+  font-weight: 400;
+  height: 100vh;
+  overflow: hidden;
+  // background-color: color(primary, 3);
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  &__head {
+    background-color: color(tertiary, 12);
+    @include flex(row, space-between);
+    color: color(white-blacks, 1);
+    height: 6.4rem;
+    &__start {
+      @include flex(row, center);
+      gap: 1.2rem;
+      margin-left: 1.2rem;
+      &--icon {
+        fill: color(white-blacks, 1);
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+      &--title {
+        font-size: 1.5rem;
+        color: black;
+        border: none;
+        border-radius: 3.2rem;
+        height: 3.2rem;
+        padding-left: 1.8rem;
+        // align-self: flex-endq;
+      }
+    }
+    &__end {
+      margin-right: 1.2rem;
+      &--icon {
+        fill: color(white-blacks, 1);
+      }
+    }
+  }
+  &__body {
+    height: 100%;
+    width: 100%;
+    background-color: color(tertiary, 2);
+    &__chats {
+      @include flex(column, flex-start center);
+      // margin: 1.2rem;
+      width: 100%;
+      min-height: 85%;
+      background-color: color(secondary, 1);
+      // gap: rem;
+      &__chatlist {
+        @include flex(column, flex-start, flex-start);
+        width: 95%;
+        height: 82vh;
+        background-color: color(white-blacks, 1);
+        border-radius: 1.2rem;
+        outline: 1px solid color(primary, 17);
+        overflow-y: scroll;
+        &__chat {
+          font-family: sans-serif;
+          @include flex(column, flex-start, center);
+          border: 1px solid color(tertiary, 16);
+          // background-color: color(white-blacks, 1);
+          background-color: color(tertiary, 2);
+          color: color(primary, 16);
+          letter-spacing: 1px;
+          font-size: 1.1rem;
+          border-radius: 1.2rem;
+          padding: 0.6rem 2.4rem 0.4rem 1.2rem;
+          gap: 0.4rem;
+          margin: 0.8rem;
+          min-width: fit-content;
+          // word-wrap: wrap;
+          max-width: 30vw;
+          &--details {
+            width: 100%;
+            @include flex(row, space-between);
+            gap: 1.2rem;
+            &--sender {
+              font-weight: 700;
+            }
+          }
+          &--icon {
+            width: 2.4rem;
+            height: 2.4rem;
+          }
+          &--text {
+            max-width: 45vw;
+            word-break: break-all;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid color(white-blacks, 4);
+          }
+        }
+      }
+    }
+    &__type {
+      // position: relative;
+      bottom: 0;
+      height: 8%;
+      width: 100%;
+      background-color: color(primary, 1);
+      @include flex(row, space-between);
+      &--input {
+        border-radius: 3.2rem;
+        border: none;
+        outline: 1px solid color(tertiary, 12);
+        height: 50%;
+        width: 80%;
+        text-align: right;
+        padding: 0 1.2rem;
+        margin-left: 1.2rem;
+        // position: absolute;
+        // top: 50%;
+        // transform: translate(1.2rem, -50%);
+      }
+      &--icon {
+        margin-right: 1.8rem;
+        fill: color(tertiary, 12);
+      }
+    }
+  }
+}
+// .sent {
+// }
+
+.sent {
+  align-self: flex-start;
+  border-bottom-right-radius: 0;
+}
+.received {
+  align-self: flex-end;
+  background-color: color(secondary, 1);
+  border-bottom-left-radius: 0;
+}
+.sent {
+  > .container__body__chats__chatlist__chat--text {
+    align-self: flex-start;
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
